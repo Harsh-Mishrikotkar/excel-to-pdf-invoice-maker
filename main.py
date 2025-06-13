@@ -19,7 +19,25 @@ for fp in filepaths:
     pdf.cell(w=50,h=8, txt=f"Invoice nr.{invoiceNumber}", ln=1)
 
     pdf.set_font(family="Times", size=16, style="B")
-    pdf.cell(w=50,h=8, txt=f"Date: {date}")
+    pdf.cell(w=50,h=8, txt=f"Date: {date}", ln=1)
 
+    columns = df.columns
+    columns = [i.replace("_", " ").title() for i in columns]
+    pdf.set_text_color(80,80,80)
+    pdf.set_font(family="Times", size=10, style="B")
+    pdf.cell(w=30, h=8, txt=columns[0], border=1)
+    pdf.cell(w=70, h=8, txt=columns[1], border=1)
+    pdf.cell(w=30, h=8, txt=columns[2], border=1)
+    pdf.cell(w=30, h=8, txt=columns[3], border=1)
+    pdf.cell(w=30, h=8, txt=columns[4], border=1, ln=1)
+
+    for i,j in df.iterrows():
+        pdf.set_font(family="Times", size=10)
+        pdf.set_text_color(80,80,80)
+        pdf.cell(w=30, h=8, txt=str(j["product_id"]), border=1)
+        pdf.cell(w=70, h=8, txt=str(j["product_name"]), border=1)
+        pdf.cell(w=30, h=8, txt=str(j["amount_purchased"]), border=1)
+        pdf.cell(w=30, h=8, txt=str(j["price_per_unit"]), border=1)
+        pdf.cell(w=30, h=8, txt=str(j["total_price"]),border=1, ln=1)
 
     pdf.output(f"PDFS/{fName}.pdf")
