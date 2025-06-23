@@ -40,4 +40,20 @@ for fp in filepaths:
         pdf.cell(w=30, h=8, txt=str(j["price_per_unit"]), border=1)
         pdf.cell(w=30, h=8, txt=str(j["total_price"]),border=1, ln=1)
 
+    totalSum = df["total_price"].sum()
+    pdf.set_font(family="Times", size=10)
+    pdf.set_text_color(80,80,80)
+    pdf.cell(w=30, h=8, txt="", border=1)
+    pdf.cell(w=70, h=8, txt="", border=1)
+    pdf.cell(w=30, h=8, txt="", border=1)
+    pdf.cell(w=30, h=8, txt="", border=1)
+    pdf.cell(w=30, h=8, txt=str(totalSum),border=1, ln=1)
+
+    pdf.set_font(family="Times", size=10, style="B")
+    pdf.cell(w=30, h=8, txt=f"The Total price is {totalSum}", ln=1)
+
+    pdf.set_font(family="Times", size=14, style="B")
+    pdf.cell(w=25, h=8, txt=f"PythonHow")
+    pdf.image("pythonhow.png", w=10)
+
     pdf.output(f"PDFS/{fName}.pdf")
